@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoSwift</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    header {
+      background: #333;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 98%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    .logo {
+      height: 60px;
+      width: auto;
+      margin-right: 20px;
+    }
+    nav {
+      display: flex;  
+      align-items: center;
+      width: 100%;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li {
+      margin: 0 20px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 20px;
+      transition: color 0.3s ease-in-out;
+    }
+    nav ul li a:hover {
+      color: rgb(255, 0, 0);
+    }
+    .auth-links {
+      margin-left: auto;
+    }
+    .auth-links a, .auth-links span {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      transition: color 0.3s ease-in-out;
+    }
+    .auth-links a:hover {
+      color: rgb(255, 0, 0);
+    }
+    .hero {
+      position: relative;
+      text-align: center;
+      color: white;
+      z-index: 1;
+      height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #333; 
+    }
+    .hero input {
+      border: none;
+      border-bottom: 2px solid white;
+      background: transparent;
+      color: white;
+      font-size: 16px;
+      padding: 5px;
+      width: 300px;
+      outline: none;
+    }
+    .description {
+      text-align: center;
+      padding: 40px;
+      background: #f5f5f5;
+      margin-top: 20px;
+    }
+    .description h2 {
+      color: #333;
+    }
+    .description p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.2em;
+    }
+    .car img {
+      width: 250px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .buy-button {
+      background-color: #f5dfdf;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+    .buy-button:hover {
+      background-color: rgb(255, 0, 0);
+      color: black;
+    }
+    .brand-grid, .car-grid {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .brands h2, .featured-cars h2 {
+      text-align: center;
+    }
+    .brand img {
+      width: 100px;
+      height: auto;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+    }
+    .brand:hover img {
+      transform: translateY(-10px) scale(1.1); 
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+    }
+    @media (max-width: 768px) {
+      .logo {
+        height: 40px;
+      }
+    }
+   
+    .bmw-container {
+      padding: 60px 20px;
+      background-color: #f5f5f5;
+    }
+    .bmw-container h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+    .car-grid {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .car {
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      width: 250px;
+      transition: transform 0.3s ease-in-out;
+    }
+    .car:hover {
+      transform: scale(1.05);
+    }
+    .car img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="homepage.html">
+        <img src="logo.png" alt="Car Shop Logo" class="logo">
+      </a>
+      <ul>
+        <li><a href="homepage.html">Home</a></li>
+        <li><a href="new cars.html">New Cars</a></li>
+        <li><a href="used cars.html">Used Cars</a></li>
+        <li><a href="sell your car.html">Sell Your Car</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="auth-links">
+        <a href="sign in.html" id="sign-in-link">Sign In</a>
+        <a href="sign in.html" id="sign-up-link">Sign Up</a>
+        <span id="user-email" style="display: none; color: white;"></span>
+        <a href="#" id="logout" style="display: none; color: white;">Logout</a>
+      </div>
+    </nav>
+  </header>
+
+
+  <section class="bmw-container">
+    <h1>BMW </h1>
+    <div class="car-grid">
+        <div class="car">
+            <img src="bmw 1series.jpg" alt="BMW 1 Series">
+            <h3>BMW 1 Series</h3>
+            <p>Price: ₱2,790,000</p>
+            <a href="bmw 1series.html"><button class="buy-button">Buy Now</button></a>
+        </div>
+          <div class="car">
+            <img src="2021-bmw-318i.webp" alt="BMW 3 Series">
+            <h3>BMW 3 Series</h3>
+            <p>Price: $3,590,000</p>
+            <a href="bmw3 series bmw brand.html"><button class="buy-button">Buy Now</button></a>
+          </div>
+          <div class="car">
+            <img src="bmw-x5-2024-main-1694079936.jpg" alt="BMW X5">
+            <h3>BMW X5</h3>
+            <p>Price: $5,990,000</p>
+            <a href="bmw x5 bmw brand.html"><button class="buy-button">Buy Now</button></a>
+          </div>
+          <div class="car">
+            <img src="bmw-m4-coupe-competition-color-533082.avif" alt="BMW M4">
+            <h3>BMW M4</h3>
+            <p>Price: $9,790,000</p>
+            <a href="bmw m4 bmw brand.html"><button class="buy-button">Buy Now</button></a>
+          </div>
+          <div class="car">
+            <img src="bmw-i7-front-angle-low-view-678009.avif" alt="BMW 7 Series">
+            <h3>BMW 7 Series</h3>
+            <p>Price: $8,990,000</p>
+            <a href="bmw i7 bmw brand.html"><button class="buy-button">Buy Now</button></a>
+          </div>
+    </div>
+  </section>
+
+  <script>
+    function checkUser() {
+      let userEmail = localStorage.getItem("userEmail"); 
+      if (userEmail) {
+        document.getElementById("sign-in-link").style.display = "none";
+        document.getElementById("sign-up-link").style.display = "none";
+        document.getElementById("user-email").style.display = "inline";
+        document.getElementById("user-email").innerText = "Signed in as: " + userEmail;
+        document.getElementById("logout").style.display = "inline";
+      }
+    }
+
+    document.getElementById("logout").addEventListener("click", function () {
+      localStorage.removeItem("userEmail"); 
+      window.location.reload(); 
+    });
+
+    window.onload = checkUser;
+  </script>
+</body>
+</html>

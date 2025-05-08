@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell Your Car AutoSwift</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    header {
+      background: #333;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 98%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    .logo {
+      height: 60px;
+      width: auto;
+      margin-right: 20px;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li {
+      margin: 0 20px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 20px; 
+      transition: color 0.3s ease-in-out;
+    }
+    nav ul li a:hover {
+      color: rgb(255, 0, 0);
+    }
+    .auth-links {
+      margin-left: auto;
+    }
+    .auth-links a, .auth-links span {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      transition: color 0.3s ease-in-out;
+    }
+    .auth-links a:hover {
+      color: rgb(255, 0, 0);
+    }
+    main {
+      margin-top: 100px; 
+      padding: 20px;
+    }
+    .sell-form {
+      max-width: 600px;
+      margin: 100px auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .sell-form h2 {
+      text-align: center;
+    }
+    .sell-form label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    .sell-form input, .sell-form textarea, .sell-form select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .sell-form button {
+      background-color: #ff6600;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+      width: 100%;
+    }
+    .sell-form button:hover {
+      background-color: yellow;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="homepage.html">
+        <img src="logo.png" alt="Car Shop Logo" class="logo">
+      </a>
+      <ul>
+        <li><a href="homepage.html">Home</a></li>
+        <li><a href="new cars.html">New Cars</a></li>
+        <li><a href="used cars.html">Used Cars</a></li>
+        <li><a href="sell your car.html">Sell Your Car</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="auth-links">
+        <a href="sign in.html" id="sign-in-link">Sign In</a>
+        <a href="sign up.html" id="sign-up-link">Sign Up</a>
+        <span id="user-email" style="display: none; color: white;"></span>
+        <a href="#" id="logout" style="display: none; color: white;">Logout</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="sell-form">
+      <h2>Sell Your Car</h2>
+      <form action="#" method="post">
+        <label for="car-make">Car Make:</label>
+        <input type="text" id="car-make" name="car-make" required>
+
+        <label for="car-model">Car Model:</label>
+        <input type="text" id="car-model" name="car-model" required>
+
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" required>
+
+        <label for="price">Asking Price ($):</label>
+        <input type="number" id="price" name="price" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+
+        <label for="image">Upload Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+
+        <button type="submit">Submit Listing</button>
+      </form>
+    </section>
+  </main>
+  <script>
+    function checkUser() {
+      let userEmail = localStorage.getItem("userEmail"); 
+      if (userEmail) {
+        
+        document.getElementById("sign-in-link").style.display = "none";
+        document.getElementById("sign-up-link").style.display = "none";
+        document.getElementById("user-email").style.display = "inline";
+        document.getElementById("user-email").innerText = "Signed in as: " + userEmail;
+        document.getElementById("logout").style.display = "inline";
+      }
+    }
+
+    document.getElementById("logout").addEventListener("click", function () {
+      localStorage.removeItem("userEmail"); 
+      window.location.reload(); 
+    });
+
+   
+    window.onload = checkUser;
+  </script>
+</body>
+</html>

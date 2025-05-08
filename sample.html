@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoSwift</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      padding-bottom: 160px; /* To avoid footer overlaying content */
+    }
+    header {
+      background: #333;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-sizing: border-box;
+    }
+    .logo {
+      height: 60px;
+      width: auto;
+      margin-right: 20px;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li {
+      margin: 0 20px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 20px;
+      transition: color 0.3s ease-in-out;
+    }
+    nav ul li a:hover {
+      color: rgb(255, 0, 0);
+    }
+    .auth-links {
+      margin-left: auto;
+    }
+    .auth-links a,
+    .auth-links span {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      transition: color 0.3s ease-in-out;
+    }
+    .auth-links a:hover {
+      color: rgb(255, 0, 0);
+    }
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50vh;
+      overflow: hidden;
+      z-index: -1;
+    }
+    .video-background video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero {
+      position: relative;
+      text-align: center;
+      color: white;
+      z-index: 1;
+      height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero input {
+      border: none;
+      border-bottom: 2px solid white;
+      background: transparent;
+      color: white;
+      font-size: 16px;
+      padding: 5px;
+      width: 300px;
+      outline: none;
+    }
+    .description {
+      display: none; /* Moved to footer */
+    }
+    .car img {
+      width: 100%;
+      max-width: 250px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .buy-button {
+      background-color: #f5dfdf;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+    .buy-button:hover {
+      background-color: rgb(255, 0, 0);
+      color: black;
+    }
+    .brand-grid,
+    .car-grid {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .brands h2,
+    .featured-cars h2 {
+      text-align: center;
+    }
+    .brand img {
+      width: 100px;
+      height: auto;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    .brand:hover img {
+      transform: translateY(-10px) scale(1.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer Styling */
+    .footer {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .footer p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 20px;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: rgb(255, 0, 0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+      }
+      nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        display: none;
+      }
+      nav ul li {
+        margin: 5px 0;
+      }
+      .logo {
+        height: 50px;
+      }
+      .hero {
+        height: 60vh;
+      }
+      .hero input {
+        width: 80%;
+        max-width: 350px;
+      }
+      .car img {
+        max-width: 100%;
+      }
+      .brand-grid {
+        flex-direction: column;
+      }
+      .brand img {
+        width: 80%;
+        max-width: 120px;
+      }
+
+      /* Hamburger Menu */
+      .hamburger {
+        display: block;
+        width: 30px;
+        height: 20px;
+        cursor: pointer;
+        position: relative;
+        z-index: 1001;
+      }
+      .hamburger div {
+        background-color: white;
+        height: 4px;
+        width: 100%;
+        margin: 4px 0;
+        transition: 0.3s;
+      }
+
+      .nav-active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: #333;
+        width: auto;
+        z-index: 1000;
+        box-sizing: border-box;
+        border-radius: 10px;
+        padding: 5px;
+      }
+      .nav-active li {
+        margin: 0 10px;
+      }
+      .nav-active li a {
+        font-size: 18px;
+        padding: 10px;
+        color: white;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        height: 50vh;
+        font-size: 14px;
+      }
+      .car img {
+        max-width: 100%;
+      }
+      .buy-button {
+        padding: 8px 14px;
+        font-size: 14px;
+      }
+      .footer p {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="homepage.html">
+        <img src="logo.png" alt="Car Shop Logo" class="logo" />
+      </a>
+      <ul>
+        <li><a href="homepage.html">Home</a></li>
+        <li><a href="new-cars.html">New Cars</a></li>
+        <li><a href="used-cars.html">Used Cars</a></li>
+        <li><a href="sell-your-car.html">Sell Your Car</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="auth-links">
+        <a href="log-in.html" id="sign-in-link">Sign In</a>
+        <a href="log-in.html" id="sign-up-link">Sign Up</a>
+        <span id="user-email" style="display: none;"></span>
+        <a href="#" id="logout" style="display: none;">Logout</a>
+      </div>
+    </nav>
+    <!-- Hamburger Menu -->
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="video-background">
+      <video autoplay muted loop>
+        <source src="backround.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="hero-content">
+      <h1>Welcome to AutoSwift</h1>
+      <input type="text" id="searchLine" placeholder="Search for cars..." onkeyup="searchCars()" />
+      <button class="search-button">Search</button>
+    </div>
+  </section>
+
+  <main>
+    <section class="brands" id="brands">
+      <h2>Browse by Brand</h2>
+      <div class="brand-grid">
+        <div class="brand"><a href="toyota-brand.html"><img src="toyota.jfif" alt="Toyota" /></a></div>
+        <div class="brand"><a href="honda-brand.html"><img src="honda.webp" alt="Honda" /></a></div>
+        <div class="brand"><a href="bmw-brand.html"><img src="BMW.svg.webp" alt="BMW" /></a></div>
+        <div class="brand"><a href="mercedes-benz-brand.html"><img src="mercedes benz.jpg" alt="Mercedes" /></a></div>
+        <div class="brand"><a href="ford-brand.html"><img src="ford.jpg" alt="Ford" /></a></div>
+      </div>
+    </section>
+
+    <section class="featured-cars">
+      <h2>Featured Cars</h2>
+      <div class="car-grid" id="car-list">
+        <div class="car">
+          <img src="toyota-gr86-trueno.avif" alt="Trueno" />
+          <h3>Toyota GR86 Trueno</h3>
+          <p>Price: ₱2.615M</p>
+          <button class="buy-button"><a href="toyota-gr86.html">Buy Now</a></button>
+        </div>
+        <div class="car">
+          <img src="bmw-x3.avif" alt="BMW X3" />
+          <h3>BMW X3</h3>
+          <p>Price: ₱4.29M</p>
+          <button class="buy-button"><a href="bmw-x3.html">Buy Now</a></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 AutoSwift | 
+      <a href="#" class="fab fa-facebook" target="_blank"></a> | 
+      <a href="#" class="fab fa-instagram" target="_blank"></a> | 
+      <a href="#" class="fab fa-youtube" target="_blank"></a>
+    </p>
+  </footer>
+
+  <script>
+    function checkUser() {
+      let userEmail = localStorage.getItem("userEmail");
+      if (userEmail) {
+        document.getElementById("sign-in-link").style.display = "none";
+        document.getElementById("sign-up-link").style.display = "none";
+        document.getElementById("user-email").style.display = "inline";
+        document.getElementById("user-email").innerText = "Signed in as: " + userEmail;
+        document.getElementById("logout").style.display = "inline";
+      }
+    }
+
+    document.getElementById("logout").addEventListener("click", function () {
+      localStorage.removeItem("userEmail");
+      window.location.reload();
+    });
+
+    window.onload = checkUser;
+
+    function toggleMenu() {
+      const menu = document.querySelector("nav ul");
+      menu.classList.toggle("nav-active");
+    }
+
+    function searchCars() {
+      var input = document.getElementById('searchLine').value.toLowerCase();
+      var cars = document.getElementsByClassName('car');
+      for (var i = 0; i < cars.length; i++) {
+        var carTitle = cars[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+        if (carTitle.indexOf(input) > -1) {
+          cars[i].style.display = '';
+        } else {
+          cars[i].style.display = 'none';
+        }
+      }
+    }
+
+    // Close menu if clicked outside
+    document.addEventListener('click', function(event) {
+      const menu = document.querySelector("nav ul");
+      const hamburger = document.querySelector('.hamburger');
+      if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+        menu.classList.remove('nav-active');
+      }
+    });
+  </script>
+</body>
+</html>
